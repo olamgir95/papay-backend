@@ -3,9 +3,6 @@ const express = require("express");
 const app = express();
 const router = require("./router.js");
 
-const db = require("./server").db();
-const mongoDb = require("mongodb");
-
 //1 kirish code
 app.use(express.static("public"));
 app.use(express.json());
@@ -17,6 +14,6 @@ app.set("views", "views");
 app.set("view engine", "ejs");
 
 //4. Routing code
-app.use("/", router)
+app.use("/", router);
 
 module.exports = app;
