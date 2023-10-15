@@ -4,7 +4,7 @@ const app = express();
 const router = require("./router.js");
 
 // let session = require("express-session");
-// const MongoDBStore = require("connection-mongodb-session")(session);
+// const MongoDBStore = require("connect-mongodb-session")(session);
 // const strore = new MongoDBStore({
 //   url: process.env.MONGO_URL,
 //   collection: "sessions",
@@ -15,9 +15,9 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//2 session code
+// 2 session code
 // app.use(
-//   Sessions({
+//   session({
 //     secret: process.env.SESSION_SECRET,
 //     cookie: {
 //       maxAge: 30 * 60 * 1000, //for 30 minut

@@ -6,8 +6,8 @@ memberController.signup = async (req, res) => {
   try {
     console.log(`POST: cont/signup`);
     const data = req.body;
-    const member = new Member();
-    const new_member = await member.signupData(data);
+    member = new Member();
+    new_member = await member.signupData(data);
 
     res.json({ state: "successed", data: new_member });
   } catch (err) {
@@ -16,10 +16,18 @@ memberController.signup = async (req, res) => {
   }
 };
 
-memberController.login = (req, res) => {
-  console.log("POST cont.login");
+memberController.login = async (req, res) => {
+  try {
+    console.log(`POST: cont/login`);
+    const data = req.body;
+    member = new Member();
+    new_member = await member.loginData(data);
 
-  res.send("Log in sahifadasiz");
+    res.json({ state: "successed", data: new_member });
+  } catch (err) {
+    console.log(`ERROR, cont/login, ${err.message}`);
+    res.json({ state: "fail", message: err.message });
+  }
 };
 
 memberController.logout = (req, res) => {
