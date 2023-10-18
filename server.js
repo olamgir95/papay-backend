@@ -21,7 +21,7 @@ mongoose.connect(
 
       const app = require("./app");
       const server = http.createServer(app);
-      let PORT = process.env.PORT || 5000;
+      let PORT = process.env.PORT || 3000;
       server.listen(PORT, function () {
         console.log(
           `Server is running on port ${PORT}, http://localhost:${PORT}`
