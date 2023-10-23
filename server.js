@@ -10,18 +10,16 @@ mongoose.set("strictQuery", false);
 mongoose.connect(
   connectionString,
 
-  { useNewUrlParser: true,
-     useUnifiedTopology: true
-    },
+  { useNewUrlParser: true, useUnifiedTopology: true },
   (err, goose) => {
-    if ((err)) console.log("Error on connection mongoose");
+    if (err) console.log("Error on connection mongoose");
     else {
       console.log("mongoose connection sucsess");
       // console.log(goose);
 
       const app = require("./app");
       const server = http.createServer(app);
-      let PORT = process.env.PORT || 3005;
+      let PORT = process.env.PORT || 3000;
       server.listen(PORT, function () {
         console.log(
           `Server is running on port ${PORT}, http://localhost:${PORT}`
