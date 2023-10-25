@@ -70,7 +70,7 @@ const productSchema = new mongoose.Schema(
       },
     },
 
-    product_description: {
+    product_descrption: {
       type: String,
       required: true,
     },

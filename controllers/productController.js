@@ -20,13 +20,16 @@ productController.addNewProduct = async (req, res) => {
 
     const product = new Product();
     let data = req.body;
+
     data.product_images = req.files.map((ele) => {
       return ele.path;
     });
-    const result = product.addNewProductData(data, req.member);
-    assert.ok(result, Definer.product_err1);
 
-    res.send("ok");
+    const result = product.addNewProductData(data, req.member);
+
+    const html = `<script> alert(new dish added successfullly);
+    window.location.replace('/resto/products/menu')</script>`;
+    res.end(html);
   } catch (err) {
     console.log(`ERROR, cont/addNewProduct,    ${err.message}`);
   }
