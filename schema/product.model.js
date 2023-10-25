@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
 const {
-  member_type_enums,
-  status_type_enums,
-  ordinary_enums,
   product_size_enums,
   product_status_enums,
   product_collection_enums,

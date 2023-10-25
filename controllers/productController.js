@@ -9,7 +9,7 @@ productController.getAllProducts = async (req, res) => {
     console.log(`GET: cont/getAllProducts `);
   } catch (err) {
     console.log(`ERROR, cont/getAllProducts,    ${err.message}`);
-    res.jso({ state: "fail", message: err.message });
+    res.json({ state: "fail", message: err.message });
   }
 };
 
@@ -24,7 +24,7 @@ productController.addNewProduct = async (req, res) => {
     data.product_images = req.files.map((ele) => {
       return ele.path;
     });
-
+    console.log(req.params.id);
     const result = product.addNewProductData(data, req.member);
 
     const html = `<script> alert(new dish added successfullly);
@@ -38,7 +38,16 @@ productController.addNewProduct = async (req, res) => {
 productController.updateChosenProduct = async (req, res) => {
   try {
     console.log(`POST: cont/updateChoseProduct `);
+    const product = new Product();
+    const id = req.params.id;
+    const result = await product.updateChosenProductData(
+      id,
+      req.body,
+      req.member._id
+    );
+    await res.json({ state: "success", data: result });
   } catch (err) {
     console.log(`ERROR, cont/updateChoseProduct,    ${err.message}`);
+    res.json({ state: "fail", message: err.message });
   }
 };

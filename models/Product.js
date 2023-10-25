@@ -5,8 +5,9 @@ const { shapeIntoMongooseObjectId } = require("../lib/config");
 
 class Product {
   constructor() {
-    this.ProductModel = ProductModel;
+    this.productModel = ProductModel;
   }
+
   async addNewProductData(data, member) {
     try {
       data.restaurant_mb_id = shapeIntoMongooseObjectId(member._id);
@@ -22,17 +23,23 @@ class Product {
     }
   }
 
-  async loginData(input) {
+  async updateChosenProductData(id, updated_data, mb_id) {
     try {
-      const member = this.ProductModel.findOne(
-        { mb_nick: input.mb_nick },
-        { mb_nick: 1, mb_password: 1 }
-      ).exec();
-      assert.ok(member, Definer.auth_err2);
+      id = shapeIntoMongooseObjectId(id);
+      mb_id = shapeIntoMongooseObjectId(mb_id);
 
-      const isMatch = bcrypt.compare(input.mb_password, member.mb_password);
-      assert.ok(isMatch, Definer.auth_err3);
-      return this.ProductModel.findOne({ mb_nick: input.mb_nick }).exec();
+      console.log(updated_data);
+      const result = await this.productModel
+        .findOneAndUpdate({ _id: id, restaurant_mb_id: mb_id }, updated_data, {
+          runValidators: true,
+          lean: true,
+          returnDocument: "after",
+        })
+        .exec();
+
+      assert.ok(result, Definer.general_err1);
+
+      return result;
     } catch (err) {
       throw err;
     }
