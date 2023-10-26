@@ -24,7 +24,6 @@ productController.addNewProduct = async (req, res) => {
     data.product_images = req.files.map((ele) => {
       return ele.path;
     });
-    console.log(req.params.id);
     const result = product.addNewProductData(data, req.member);
 
     const html = `<script> alert(new dish added successfullly);
@@ -47,7 +46,7 @@ productController.updateChosenProduct = async (req, res) => {
     );
     await res.json({ state: "success", data: result });
   } catch (err) {
-    console.log(`ERROR, cont/updateChoseProduct,    ${err.message}`);
+    console.log(`ERROR, cont/updateChosenProduct,    ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
 };
