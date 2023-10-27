@@ -15,7 +15,6 @@ class Product {
         restaurant_mb_id: member._id,
       });
       assert.ok(result, Definer.general_err1);
-      console.log(result);
     } catch {}
   }
   async addNewProductData(data, member) {

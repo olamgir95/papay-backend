@@ -5,8 +5,10 @@
   <% if(!member){%>
   <h2>Siz authenticated emassiz</h2>
   <%} else {%>
-  <h1>Siz authenticed bo'lgansiz va sizning nickingiz <%=member.mb_nick%>
-<p>sizning telefoningiz <%= member.mb_phone%></p></h1>
+  <h1>
+    Siz authenticed bo'lgansiz va sizning nickingiz <%=member.mb_nick%>
+    <p>sizning telefoningiz <%= member.mb_phone%></p>
+  </h1>
   <%}%>
 </body>
-<%- include('includes/footer') %> <%- include('includes/footer') %>
+<%- include('includes/footer') %>

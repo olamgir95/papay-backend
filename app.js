@@ -33,6 +33,7 @@ app.use(
 
 app.use(function (req, res, next) {
   res.locals.member = req.session.member;
+  console.log(res.locals.member, "mem");
   next();
 });
 //3 views code
