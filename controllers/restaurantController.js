@@ -28,7 +28,7 @@ restaurantController.getMyRestaurantProducts = async (req, res) => {
 restaurantController.getSignupMyRestaurant = async (req, res) => {
   try {
     console.log(`GET: cont/getSignupMyRestaurant`);
-    res.render("signup");
+    res.render("sign-up");
   } catch (err) {
     console.log(`ERROR, cont/getSignupMyRestaurant, ${err.message}`);
     res.json({ state: "fail", message: err.message });
@@ -43,6 +43,7 @@ restaurantController.signupProcess = async (req, res) => {
     new_member = await member.signupData(data);
 
     req.session.member = new_member;
+
     res.redirect("/resto/products/menu");
   } catch (err) {
     console.log(`ERROR, cont/signup, ${err.message}`);
