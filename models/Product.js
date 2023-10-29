@@ -14,10 +14,12 @@ class Product {
       const result = await this.productModel.find({
         restaurant_mb_id: member._id,
       });
-      console.log(result, "res");
       assert.ok(result, Definer.general_err1);
-    } catch {}
+    } catch (err) {
+      throw err;
+    }
   }
+
   async addNewProductData(data, member) {
     try {
       data.restaurant_mb_id = shapeIntoMongooseObjectId(member._id);
