@@ -63,14 +63,16 @@ restaurantController.getLoginMyRestaurant = async (req, res) => {
 
 restaurantController.loginProcess = async (req, res) => {
   try {
-    console.log(`POST: cont/login`);
+    console.log(`POST: cont/loginProcess`);
     const data = req.body;
     member = new Member();
     result = await member.loginData(data);
 
     req.session.member = result;
     req.session.save(function () {
-      res.redirect("/resto/products/menu");
+      result.mb_type === "ADMIN"
+        ? res.redirect("/resto/all-restaurant")
+        : res.redirect("/resto/products/menu");
     });
   } catch (err) {
     console.log(`ERROR, cont/login, ${err.message}`);
