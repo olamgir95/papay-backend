@@ -6,7 +6,7 @@ const uuid = require("uuid");
 function getTargetImageStorage(address) {
   return multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, "./uploads/products");
+      cb(null, `./uploads/${address}`);
     },
     filename: function (req, file, cb) {
       console.log(file);
@@ -17,7 +17,7 @@ function getTargetImageStorage(address) {
   });
 }
 const makeUploader = (address) => {
-  const storage = getTargetImageStorage();
+  const storage = getTargetImageStorage(address);
   return multer({ storage: storage });
 };
 
