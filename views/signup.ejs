@@ -17,7 +17,7 @@
         </div>
         <p>
           Ro'yxatdan allaqachon o'tganmisiz?
-          <a href="/resto/signup" style="color: #6440fb">Ro'yxatdan o'tish</a>
+          <a href="/resto/sign-up" style="color: #6440fb">Ro'yxatdan o'tish</a>
         </p>
       </div>
       <div class="sign_input_frame">
@@ -103,7 +103,9 @@
     let filename = "";
     fileTarget.on("change", function () {
       if (window.FileReader) {
+        console.log("red", window);
         const uploading_file = $(this)[0].files[0];
+        console.log(uploading_file);
         const fileType = uploading_file["type"];
         const validImageTypes = ["image/jpg", "image/jpeg", "image/png"];
         if (!validImageTypes.includes(fileType)) {

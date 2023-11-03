@@ -24,18 +24,18 @@
         class="nav-item pointer"
         onclick="return confirm('Do you want logout?')"
       >
-        <a class="nav-link" aria-current="page" href="/resto/logout">Logout</a>
+        <a class="nav-link" href="/resto/logout">Logout</a>
       </li>
       <%} else {%>
+      <li class="nav-item pointer">
+        <a class="nav-link" aria-current="page" href="/resto/products/menu"
+          >MyResto</a
+        >
+      </li>
       <li
         class="nav-item pointer"
         onclick="return confirm('Do you want logout?')"
       >
-        <a class="nav-link" aria-current="page" href="/resto/products/menu"
-          >AllResto</a
-        >
-      </li>
-      <li class="nav-item pointer">
         <a class="nav-link" aria-current="page" href="/resto/logout">Logout</a>
       </li>
       <%}%>
