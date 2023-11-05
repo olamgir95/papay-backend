@@ -9,7 +9,6 @@ const connectionString = process.env.MONGO_URL;
 mongoose.set("strictQuery", false);
 mongoose.connect(
   connectionString,
-
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err, goose) => {
     if (err) console.log("Error on connection mongoose");
