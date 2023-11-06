@@ -29,24 +29,27 @@
               <th scope="col">Restaurant top</th>
               <th scope="col">Restaurant holati</th>
             </thead>
+            <% restaurant_data.map(function(value, key){ %>
             <tbody class="bg-white">
-              <td>1</td>
-              <td>Doda</td>
-              <td>998954464549</td>
+              <td><%= key+1%></td>
+              <td><%= value.mb_nick%></td>
+              <td><%= value.mb_phone%></td>
               <td style="width: 13%">
                 <label class="switch">
-                  <input type="checkbox" class="mb_top" />
+                  <input type="checkbox" class="mb_top" id="<%= value._id%>" 
+                  <%= value.mb_top ==="Y" ? "checked" : "" %> />
                   <span class="slider round"></span>
                 </label>
               </td>
               <td style="width: 13%">
                 <select class="spec_select mb_status" name="" id="">
-                  <option value="ONPAUSE">ONPAUSE</option>
-                  <option value="ACTIVE">ACTIVE</option>
-                  <option value="DELETED">DELETED</option>
+                  <option value="ONPAUSE" <%= value.mb_status ==="ONPAUSE" ? "selected" : "" %> >ONPAUSE</option>
+                  <option value="ACTIVE" <%= value.mb_status ==="ACTIVE" ? "selected" : "" %>>ACTIVE</option>
+                  <option value="DELETED" <%= value.mb_status ==="DELETED" ? "selected" : "" %>>DELETED</option>
                 </select>
               </td>
             </tbody>
+            <% }); %>
           </table>
         </div>
       </div>
