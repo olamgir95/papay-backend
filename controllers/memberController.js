@@ -58,15 +58,13 @@ memberController.craeteToken = (result) => {
       _id: result._id,
       mb_nick: result.mb_nick,
       mb_type: result.mb_type,
-      mb_phone: result.mb_phone,
-      mb_status: result.mb_status,
     };
     const token = jwt.sign(upload_data, process.env.SECRET_TOKEN, {
       expiresIn: "6h",
     });
-    return token;
-    console.log(token, "tok");
+
     assert.ok(token, Definer.auth_err4);
+    return token;
   } catch (err) {
     throw err;
   }
