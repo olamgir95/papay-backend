@@ -13,7 +13,7 @@ mongoose.connect(
   (err, goose) => {
     if (err) console.log("Error on connection mongoose");
     else {
-      console.log("mongoose connection sucsess");
+      console.log("mongoose connection success");
       // console.log(goose);
 
       const app = require("./app");
