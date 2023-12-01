@@ -285,6 +285,7 @@ console.log('updateChosenProduct', err);
 })
 
     function validateForm() {
+      console.log(member._id);
       const restaurant_mb_id = $(".restaurant_mb_id").val(),
         product_name = $(".product_name").val(),
         product_price = $(".product_price").val(),
@@ -292,7 +293,6 @@ console.log('updateChosenProduct', err);
         product_left_cnt = $(".product_left_cnt").val(),
         product_collection = $(".product_collection").val(),
         product_status = $(".product_status").val();
-
       if (
         restaurant_mb_id === "" ||
         product_name === "" ||
