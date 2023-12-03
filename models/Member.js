@@ -58,6 +58,7 @@ class Member {
         .aggregate([
           { $match: { _id: id, mb_status: "ACTIVE" } },
           { $unset: "mb_password" },
+          //todo: check auth member likiedf the chosen member
         ])
         .exec();
       assert.ok(result, Definer.general_err2);
