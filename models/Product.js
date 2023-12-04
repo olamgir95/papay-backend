@@ -19,6 +19,7 @@ class Product {
         );
         match["product_collection"] = data.product_collection;
       }
+      console.log("match", data);
       const sort =
         data.order === "product_price"
           ? { [data.order]: 1 }
@@ -46,7 +47,7 @@ class Product {
 
       if (member) {
         const member_obj = new Member();
-        member_obj.viewChosenItemByMember(member, id, "product");
+        await member_obj.viewChosenItemByMember(member, id, "product");
       }
 
       const result = await this.productModel
@@ -54,7 +55,6 @@ class Product {
         .exec();
 
       assert.ok(result, Definer.general_err1);
-
       return result;
     } catch (err) {
       throw err;
