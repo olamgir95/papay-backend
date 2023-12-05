@@ -20,19 +20,19 @@ restaurantController.getRestaurants = async (req, res) => {
   }
 };
 
-// restaurantController.getChosenRestaurant = async (req, res) => {
-//   try {
-//     console.log(`GET: cont/getChosenRestaurant `);
-//     const product = new Restaurant(),
-//       id = req.params.id,
-//       result = await product.getChosenRestaurantData(req.member, id);
+restaurantController.getChosenRestaurant = async (req, res) => {
+  try {
+    console.log(`GET: cont/getChosenRestaurant `);
+    const product = new Restaurant(),
+      id = req.params.id,
+      result = await product.getChosenRestaurantData(req.member, id);
 
-//     res.json({ state: "success", data: result });
-//   } catch (err) {
-//     console.log(`ERROR, cont/getChosenRestaurant,    ${err.message}`);
-//     res.json({ state: "fail", message: err.message });
-//   }
-// };
+    res.json({ state: "success", data: result });
+  } catch (err) {
+    console.log(`ERROR, cont/getChosenRestaurant,    ${err.message}`);
+    res.json({ state: "fail", message: err.message });
+  }
+};
 
 /**********************************
  *  BSSR RELATED METHODS          *

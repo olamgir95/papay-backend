@@ -1,44 +1,12 @@
 const assert = require("assert");
 const Definer = require("../lib/mistake");
 const MemberModel = require("../schema/member.model");
+const Member = require("../models/Member");
 const { shapeIntoMongooseObjectId } = require("../lib/config");
 
 class Restaurant {
   constructor() {
     this.memberModel = MemberModel;
-  }
-
-  async getAllRestaurantsData() {
-    try {
-      const result = await this.memberModel
-        .find({
-          mb_type: "RESTAURANT",
-        })
-        .exec();
-      assert(result, Definer.general_err1);
-
-      return result;
-    } catch (err) {
-      throw err;
-    }
-  }
-
-  async updateRestaurantByAdminData(update_data) {
-    try {
-      const id = shapeIntoMongooseObjectId(update_data?.id);
-      const result = await this.memberModel
-        .findByIdAndUpdate({ _id: id }, update_data, {
-          runValidators: true,
-          lean: true,
-          returnDocument: "after",
-        })
-        .exec();
-
-      assert.ok(result, Definer.general_err1);
-      return result;
-    } catch (err) {
-      throw err;
-    }
   }
 
   async getRestaurantData(member, data) {
@@ -71,6 +39,64 @@ class Restaurant {
       //todo: check auth member  likes target
 
       const result = await this.memberModel.aggregate(aggregationQuery).exec();
+      assert.ok(result, Definer.general_err1);
+      return result;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async getChosenRestaurantData(member, id) {
+    try {
+      const auth_mb_id = shapeIntoMongooseObjectId(member?._id);
+      id = shapeIntoMongooseObjectId(id);
+
+      if (member) {
+        const member_obj = new Member();
+        await member_obj.viewChosenItemByMember(member, id, "member");
+      }
+
+      const result = await this.memberModel
+        .findOne({ _id: id, mb_status: "ACTIVE" })
+        .exec();
+
+      assert.ok(result, Definer.general_err1);
+      return result;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  /**********************************
+   *  BSSR RELATED METHODS          *
+   **********************************/
+
+  async getAllRestaurantsData() {
+    try {
+      const result = await this.memberModel
+        .find({
+          mb_type: "RESTAURANT",
+        })
+        .exec();
+      assert(result, Definer.general_err1);
+
+      return result;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async updateRestaurantByAdminData(update_data) {
+    try {
+      const id = shapeIntoMongooseObjectId(update_data?.id);
+      const result = await this.memberModel
+        .findByIdAndUpdate({ _id: id }, update_data, {
+          runValidators: true,
+          lean: true,
+          returnDocument: "after",
+        })
+        .exec();
+
       assert.ok(result, Definer.general_err1);
       return result;
     } catch (err) {

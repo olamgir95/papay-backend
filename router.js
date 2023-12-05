@@ -40,10 +40,10 @@ router.post(
   restaurantController.getRestaurants
 );
 
-// router.get(
-//   "/products/:id",
-//   memberController.retrieveAuthMember,
-//   restaurantController.getChosenRestaurant
-// );
+router.get(
+  "/restaurants/:id",
+  memberController.retrieveAuthMember,
+  restaurantController.getChosenRestaurant
+);
 
 module.exports = router;
