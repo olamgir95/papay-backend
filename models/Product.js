@@ -19,7 +19,6 @@ class Product {
         );
         match["product_collection"] = data.product_collection;
       }
-      console.log("match", data);
       const sort =
         data.order === "product_price"
           ? { [data.order]: 1 }
