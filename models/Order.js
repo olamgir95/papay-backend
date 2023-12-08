@@ -31,9 +31,12 @@ class Order {
         mb_id
       );
 
-      console.log("order_id.id", order_id);
+      console.log("order_id:::", order_id);
 
       //order item creation
+
+      await this.recordOrderItemsDta(order_id, data);
+
       return order_id;
     } catch (err) {
       throw err;
@@ -55,6 +58,76 @@ class Order {
     } catch (err) {
       console.log(err);
       throw new Error(Definer.order_err1);
+    }
+  }
+
+  async recordOrderItemsDta(order_id, data) {
+    try {
+      const pro_list = data.map(async (item) => {
+        return await this.saveOrderItemData(item, order_id);
+      });
+
+      const results = await Promise.all(pro_list);
+      console.log("result:::", results);
+      return true;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async saveOrderItemData({ _id, quantity, price }, order_id) {
+    try {
+      order_id = shapeIntoMongooseObjectId(order_id);
+      _id = shapeIntoMongooseObjectId(_id);
+
+      const order_item = new this.orderItemModel({
+        item_quantity: quantity,
+        item_price: price,
+        order_id: order_id,
+        product_id: _id,
+      });
+
+      const result = await order_item.save();
+      assert.ok(result, Definer.order_err2);
+      return "inserted";
+    } catch (err) {
+      console.log(err);
+      throw new Error(Definer.order_err2);
+    }
+  }
+
+  async getMyOrdersData(member, query) {
+    try {
+      const mb_id = shapeIntoMongooseObjectId(member._id),
+        order_status = query.status.toUpperCase(),
+        matches = { mb_id: mb_id, order_status: order_status };
+
+      const result = await this.orderModel
+        .aggregate([
+          { $match: matches },
+          { $sort: { createdAt: -1 } },
+          {
+            $lookup: {
+              from: "orderitems",
+              localField: "_id",
+              foreignField: "order_id",
+              as: "order_items",
+            },
+          },
+          {
+            $lookup: {
+              from: "products",
+              localField: "order_items.product_id",
+              foreignField: "_id",
+              as: "product_data",
+            },
+          },
+        ])
+        .exec();
+      console.log(result);
+      return result;
+    } catch (err) {
+      throw err;
     }
   }
 }
