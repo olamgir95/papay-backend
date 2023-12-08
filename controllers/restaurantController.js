@@ -9,6 +9,7 @@ let restaurantController = module.exports;
 restaurantController.getRestaurants = async (req, res) => {
   try {
     console.log(`GET: cont/getRestaurants `);
+    console.log(req.params);
     const data = req.query,
       restaurant = new Restaurant(),
       result = await restaurant.getRestaurantData(req.member, data);

@@ -11,7 +11,6 @@ orderController.createOrder = async (req, res) => {
     const { member, body } = req;
     const order = new Order();
     const result = await order.createOrderData(member, body);
-
     res.json({ state: "success", data: result });
   } catch (err) {
     console.log(`ERROR, cont/createOrder, ${err.message}`);
