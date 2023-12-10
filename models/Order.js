@@ -2,7 +2,6 @@ const assert = require("assert");
 const Definer = require("../lib/mistake");
 const OrderModel = require("../schema/order.model");
 const OrderItemModel = require("../schema/order_item.model");
-const bcrypt = require("bcryptjs");
 const { shapeIntoMongooseObjectId } = require("../lib/config");
 
 class Order {
@@ -35,7 +34,7 @@ class Order {
 
       //order item creation
 
-      await this.recordOrderItemsDta(order_id, data);
+      await this.recordOrderItemsData(order_id, data);
 
       return order_id;
     } catch (err) {
@@ -61,12 +60,11 @@ class Order {
     }
   }
 
-  async recordOrderItemsDta(order_id, data) {
+  async recordOrderItemsData(order_id, data) {
     try {
       const pro_list = data.map(async (item) => {
-        return await this.saveOrderItemData(item, order_id);
+        return await this.saveOrderItemsData(item, order_id);
       });
-
       const results = await Promise.all(pro_list);
       console.log("result:::", results);
       return true;
@@ -75,7 +73,7 @@ class Order {
     }
   }
 
-  async saveOrderItemData({ _id, quantity, price }, order_id) {
+  async saveOrderItemsData({ _id, quantity, price }, order_id) {
     try {
       order_id = shapeIntoMongooseObjectId(order_id);
       _id = shapeIntoMongooseObjectId(_id);
@@ -125,6 +123,26 @@ class Order {
         ])
         .exec();
       console.log(result);
+      return result;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async editChosenOrderData(member, data) {
+    try {
+      const mb_id = shapeIntoMongooseObjectId(member._id),
+        order_id = shapeIntoMongooseObjectId(data.order_id),
+        order_status = data.order_status.toUpperCase();
+
+      const result = await this.orderModel.findOneAndUpdate(
+        { mb_id: mb_id, _id: order_id },
+        { order_status: order_status },
+        { runValidators: true, lean: true, returnDocument: "after" }
+      );
+      console.log(result);
+
+      assert.ok(result, Definer.order_err3);
       return result;
     } catch (err) {
       throw err;
