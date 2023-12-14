@@ -84,7 +84,7 @@ const memberSchema = new mongoose.Schema(
       required: false,
       default: 0,
     },
-    mb_subsicriber_cnt: {
+    mb_subscriber_cnt: {
       type: Number,
       required: false,
       default: 0,
