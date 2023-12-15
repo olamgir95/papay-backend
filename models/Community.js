@@ -69,19 +69,19 @@ class Community {
     }
   }
 
-  async getArticlesData(member, inquery) {
+  async getArticlesData(member, inquiry) {
     try {
       const auth_mb_id = shapeIntoMongooseObjectId(member?._id);
       let matches =
-        inquery.bo_id === "all"
+        inquiry.bo_id === "all"
           ? { bo_id: { $in: board_id_enum_list }, art_status: "active" }
-          : { bo_id: inquery.bo_id, art_status: "active" };
+          : { bo_id: inquiry.bo_id, art_status: "active" };
 
-      const limit = (inquery.limit *= 1);
-      const page = (inquery.page *= 1);
+      const limit = (inquiry.limit *= 1);
+      const page = (inquiry.page *= 1);
 
-      const sort = inquery.order
-        ? { [`${inquery.order}`]: 1 }
+      const sort = inquiry.order
+        ? { [`${inquiry.order}`]: 1 }
         : { createdAt: -1 };
 
       const result = await this.boArticleModelModel
