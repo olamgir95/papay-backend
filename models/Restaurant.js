@@ -2,7 +2,10 @@ const assert = require("assert");
 const Definer = require("../lib/mistake");
 const MemberModel = require("../schema/member.model");
 const Member = require("../models/Member");
-const { shapeIntoMongooseObjectId } = require("../lib/config");
+const {
+  shapeIntoMongooseObjectId,
+  lookup_auth_member_liked,
+} = require("../lib/config");
 
 class Restaurant {
   constructor() {
@@ -36,7 +39,7 @@ class Restaurant {
       aggregationQuery.push({ $skip: (data.page - 1) * data.limit });
       aggregationQuery.push({ $limit: data.limit });
 
-      //todo: check auth member  likes target
+      aggregationQuery(lookup_auth_member_liked(auth_mb_id));
 
       const result = await this.memberModel.aggregate(aggregationQuery).exec();
       assert.ok(result, Definer.general_err1);
@@ -57,7 +60,10 @@ class Restaurant {
       }
 
       const result = await this.memberModel
-        .findOne({ _id: id, mb_status: "ACTIVE" })
+        .aggregate([
+          { $match: { _id: id, mb_status: "ACTIVE" } },
+          lookup_auth_member_liked(auth_mb_id),
+        ])
         .exec();
 
       assert.ok(result, Definer.general_err1);
