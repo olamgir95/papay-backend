@@ -55,7 +55,7 @@ const productSchema = new mongoose.Schema(
       },
     },
     product_volume: {
-      type: String,
+      type: Number,
       default: 1,
       required: function () {
         return this.product_collection === "drink";
@@ -93,7 +93,8 @@ const productSchema = new mongoose.Schema(
       default: 0,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
+  { versionKey: false }
 );
 productSchema.index(
   { restaurant_mb_id: 1, product_name: 1, product_size: 1, product_volume: 1 },

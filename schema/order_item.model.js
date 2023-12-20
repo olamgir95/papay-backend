@@ -12,7 +12,8 @@ const orderItemSchema = new Schema(
       required: false,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
+  { versionKey: false }
 );
 
 module.exports = mongoose.model("OrderItem", orderItemSchema);

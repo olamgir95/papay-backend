@@ -39,10 +39,6 @@ const memberSchema = new mongoose.Schema(
         message: "{VALUE} is not among permitted values",
       },
     },
-    mb_full_name: {
-      type: String,
-      required: false,
-    },
     mb_address: {
       type: String,
       required: false,
@@ -90,6 +86,7 @@ const memberSchema = new mongoose.Schema(
       default: 0,
     },
   },
+  { versionKey: false },
   { timestamps: true }
 );
 

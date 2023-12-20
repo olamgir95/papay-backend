@@ -8,9 +8,9 @@ let memberController = module.exports;
 memberController.signup = async (req, res) => {
   try {
     console.log(`POST: cont/signup`);
-    const data = req.body;
-    member = new Member();
-    new_member = await member.signupData(data);
+    const data = req.body,
+      member = new Member(),
+      new_member = await member.signupData(data);
 
     const token = memberController.craeteToken(new_member);
     res.cookie("access_token", token, {

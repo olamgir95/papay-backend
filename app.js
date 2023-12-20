@@ -4,6 +4,8 @@ const app = express();
 const router = require("./router.js");
 const router_bssr = require("./router_bssr.js");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
+const path = require("path");
 
 let session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
@@ -14,8 +16,15 @@ const store = new MongoDBStore({
 });
 
 //1 kirish code
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
+app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use(express.json());
+app.use(
+  cors({
+    credentials: true,
+    origin: true,
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
