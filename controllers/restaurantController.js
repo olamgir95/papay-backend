@@ -82,7 +82,7 @@ restaurantController.signupProcess = async (req, res) => {
     new_member.mb_type = "RESTAURANT";
     new_member.mb_image = req.file.path;
 
-    member = new Member();
+    const member = new Member();
     result = await member.signupData(new_member);
     assert(result, Definer.general_err1);
 

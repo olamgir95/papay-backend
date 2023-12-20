@@ -39,7 +39,7 @@
               <td><%=value.product_name%></td>
               <td><%=value.product_collection%></td>
               <td>
-                <%=value.product_collection==='ichimlik'? value.product_volume :
+                <%=value.product_collection==='drink'? value.product_volume :
                 value.product_size%>
               </td>
               <td><%=value.product_price %>$</td>
@@ -112,7 +112,7 @@
                 <option value="dish" selected>Taom</option>
                 <option value="salad">salad</option>
                 <option value="dessert">dessert</option>
-                <option value="ichimlik">ichimlik</option>
+                <option value="drink">drink</option>
                 <option value="etc">Boshqa</option>
               </select>
             </div>
@@ -128,7 +128,7 @@
             </div>
 
             <div class="half_input" id="product_volume" style="display:none">
-              <label for="">Ichimlik hajmi</label>
+              <label for="">drink hajmi</label>
               <select name="product_volume" class="product_volume">
                 <option value="0.5">0.5 litr</option>
                 <option value="1">1 litr</option>
@@ -245,7 +245,7 @@
     $(function () {
       $(".product_collection").on("change", function () {
         const selectedValue = $(this).val();
-        if (selectedValue === "ichimlik") {
+        if (selectedValue === "drink") {
           $("#product_volume").show();
           $("#product_size").hide();
         } else {
