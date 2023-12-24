@@ -15,7 +15,7 @@ memberController.signup = async (req, res) => {
     const token = memberController.craeteToken(new_member);
     res.cookie("access_token", token, {
       maxAge: 6 * 3600 * 1000,
-      httpOnly: true,
+      httpOnly: false,
     });
 
     res.json({ state: "success", data: new_member });
@@ -28,15 +28,15 @@ memberController.signup = async (req, res) => {
 memberController.login = async (req, res) => {
   try {
     console.log(`POST: cont/login`);
-    const data = req.body;
-    member = new Member();
-    result = await member.loginData(data);
+    const data = req.body,
+      member = new Member(),
+      result = await member.loginData(data);
 
     const token = memberController.craeteToken(result);
 
     res.cookie("access_token", token, {
       maxAge: 6 * 3600 * 1000,
-      httpOnly: true,
+      httpOnly: false,
     });
 
     res.json({ state: "success", data: result });
