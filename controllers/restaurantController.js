@@ -112,9 +112,9 @@ restaurantController.getLoginMyRestaurant = async (req, res) => {
 restaurantController.loginProcess = async (req, res) => {
   try {
     console.log(`POST: cont/loginProcess`);
-    const data = req.body;
-    member = new Member();
-    result = await member.loginData(data);
+    const data = req.body,
+      member = new Member(),
+      result = await member.loginData(data);
 
     req.session.member = result;
     req.session.save(function () {
