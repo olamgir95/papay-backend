@@ -10,7 +10,7 @@ const Member = require("./Member");
 
 class Community {
   constructor() {
-    this.boArticleModelModel = BoArticleModel;
+    this.boArticleModel = BoArticleModel;
   }
 
   async createArticleData(member, data) {
@@ -42,7 +42,7 @@ class Community {
       const page = query.page ? Number(query.page) : 1;
       const limit = query.limit ? Number(query.limit) : 5;
 
-      const result = await this.boArticleModelModel
+      const result = await this.boArticleModel
         .aggregate([
           { $match: { mb_id: mb_id, art_status: "active" } },
           {
@@ -86,7 +86,7 @@ class Community {
         ? { [`${inquiry.order}`]: 1 }
         : { createdAt: -1 };
 
-      const result = await this.boArticleModelModel
+      const result = await this.boArticleModel
         .aggregate([
           { $match: matches },
           {
@@ -124,9 +124,7 @@ class Community {
         await member_obj.viewChosenItemByMember(member, art_id, "community");
       }
 
-      const result = await this.boArticleModelModel
-        .findById({ _id: art_id })
-        .exec();
+      const result = await this.boArticleModel.findById({ _id: art_id }).exec();
       assert.ok(result, Definer.article_err3);
       return result;
     } catch (err) {

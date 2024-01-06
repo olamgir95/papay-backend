@@ -86,7 +86,6 @@ const memberSchema = new mongoose.Schema(
       default: 0,
     },
   },
-  { versionKey: false },
   { timestamps: true }
 );
 

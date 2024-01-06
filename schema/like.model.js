@@ -19,7 +19,6 @@ const likeSchema = new Schema(
       enum: { values: bo_id_enum_list },
     },
   },
-  { versionKey: false },
   { timestamps: { createdAt: true } }
 );
 

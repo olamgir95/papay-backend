@@ -48,8 +48,7 @@ const boArticleSchema = new Schema(
     },
     mb_id: { type: Schema.Types.ObjectId, ref: "Member", required: true },
   },
-  { timestamps: true },
-  { versionKey: false }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("boArticle", boArticleSchema);

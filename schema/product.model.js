@@ -93,8 +93,7 @@ const productSchema = new mongoose.Schema(
       default: 0,
     },
   },
-  { timestamps: true },
-  { versionKey: false }
+  { timestamps: true }
 );
 productSchema.index(
   { restaurant_mb_id: 1, product_name: 1, product_size: 1, product_volume: 1 },

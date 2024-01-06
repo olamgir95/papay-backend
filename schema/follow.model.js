@@ -6,8 +6,7 @@ const followSchema = new Schema(
     follow_id: { type: Schema.Types.ObjectId, required: true },
     subscriber_id: { type: Schema.Types.ObjectId, required: true },
   },
-  { timestamps: true },
-  { versionKey: false }
+  { timestamps: true }
 );
 
 followSchema.index({ follow_id: 1, subscriber_id: 1 }, { unique: true });

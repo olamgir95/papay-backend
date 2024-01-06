@@ -12,7 +12,7 @@ memberController.signup = async (req, res) => {
       member = new Member(),
       new_member = await member.signupData(data);
 
-    const token = memberController.craeteToken(new_member);
+    const token = memberController.createToken(new_member);
     res.cookie("access_token", token, {
       maxAge: 6 * 3600 * 1000,
       httpOnly: false,
@@ -32,7 +32,7 @@ memberController.login = async (req, res) => {
       member = new Member(),
       result = await member.loginData(data);
 
-    const token = memberController.craeteToken(result);
+    const token = memberController.createToken(result);
 
     res.cookie("access_token", token, {
       maxAge: 6 * 3600 * 1000,
@@ -52,7 +52,7 @@ memberController.logout = (req, res) => {
   res.json({ state: "success", data: "log out successfully" });
 };
 
-memberController.craeteToken = (result) => {
+memberController.createToken = (result) => {
   try {
     const upload_data = {
       _id: result._id,

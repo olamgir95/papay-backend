@@ -86,7 +86,7 @@ restaurantController.signupProcess = async (req, res) => {
     result = await member.signupData(new_member);
     assert(result, Definer.general_err1);
 
-    req.session.member = new_member;
+    req.session.member = result;
     req.session.save(function () {
       res.redirect("/resto/products/menu");
     });
@@ -143,6 +143,7 @@ restaurantController.logout = (req, res) => {
 restaurantController.validateAuthRestaurant = (req, res, next) => {
   if (req.session?.member?.mb_type === "RESTAURANT") {
     req.member = req.session.member;
+    console.log("req", req.member);
     next();
   } else
     res.json({

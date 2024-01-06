@@ -291,7 +291,7 @@ console.log('updateChosenProduct', err);
         product_description = $(".product_description").val(),
         product_left_cnt = $(".product_left_cnt").val(),
         product_collection = $(".product_collection").val(),
-        product_status = $(".product_status").val();
+        product_status = $(".new_product_status").val();
       if (
         restaurant_mb_id === "" ||
         product_name === "" ||
@@ -301,6 +301,7 @@ console.log('updateChosenProduct', err);
         product_price === "" ||
         product_status === ""
       ) {
+        console.log("fhdgf", restaurant_mb_id,product_collection, product_description, product_left_cnt, product_name, product_price, product_status)
         alert("Iltimos hamma ma'lumotlarni kiriting!");
         return false;
       } else return true;

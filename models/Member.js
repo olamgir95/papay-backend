@@ -26,7 +26,6 @@ class Member {
         console.log(mongo_err);
         throw new Error(Definer.mongo_validation_err1);
       }
-      console.log(result);
       result.mb_password = "";
 
       return result;
