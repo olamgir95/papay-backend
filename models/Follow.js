@@ -93,7 +93,7 @@ class Follow {
       assert.ok(result, Definer.general_err1);
       await this.modifyMemberFollowCounts(follow_id, "subscriber_change", -1);
       await this.modifyMemberFollowCounts(subscriber_id, "follow_change", -1);
-      return true;
+      return "unsubscribed";
     } catch (err) {
       throw err;
     }
