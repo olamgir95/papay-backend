@@ -7,8 +7,8 @@ let communityController = module.exports;
 communityController.imageInsertion = async (req, res) => {
   try {
     console.log(`POST: cont/imageInsertion`);
+    console.log(req.file);
     assert.ok(req.file, Definer.general_err3);
-
     const image_url = req.file.path.replace(/\\/g, "/");
 
     res.json({ state: "success", data: image_url });

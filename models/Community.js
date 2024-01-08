@@ -26,7 +26,7 @@ class Community {
 
   async saveArticleData(data) {
     try {
-      const article = new this.boArticleModelModel(data);
+      const article = new this.boArticleModel(data);
 
       return await article.save();
     } catch (mongo_err) {
