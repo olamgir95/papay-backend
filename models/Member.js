@@ -142,7 +142,7 @@ class Member {
         mb_phone: data.mb_phone,
         mb_address: data.mb_address,
         mb_description: data.mb_description,
-        mb_image: image.path ?? null,
+        mb_image: image?.path ?? null,
       };
 
       for (let prop in params) if (!params[prop]) delete params[prop];
@@ -154,6 +154,7 @@ class Member {
         })
         .exec();
       assert.ok(result, Definer.general_err1);
+      return result;
     } catch (err) {
       throw err;
     }

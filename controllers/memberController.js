@@ -119,8 +119,6 @@ memberController.likeMemberChosen = async (req, res) => {
 memberController.updateMember = async (req, res) => {
   try {
     console.log("POST, cont/updateMember");
-    console.log(req.file);
-    console.log(req.body);
     assert.ok(req.member, Definer.auth_err5);
     const member = new Member();
 
@@ -129,6 +127,7 @@ memberController.updateMember = async (req, res) => {
       req.body,
       req.file
     );
+    console.log("res,", result);
     res.json({ state: "success", data: result });
   } catch (err) {
     console.log(`ERROR, cont/updateMember, ${err.message}`);
