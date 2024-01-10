@@ -6,6 +6,7 @@ const router_bssr = require("./router_bssr.js");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const path = require("path");
+const http = require("http");
 
 let session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
@@ -55,4 +56,31 @@ app.set("view engine", "ejs");
 app.use("/", router);
 app.use("/resto", router_bssr);
 
-module.exports = app;
+const server = http.createServer(app);
+
+//SOCKET.IO BACKEND SERVER //
+const io = require("socket.io")(server, {
+  serveClient: false,
+  origin: "*:*",
+  transport: ["websocket", "xhr-polling"],
+});
+let online_users = 0;
+io.on("connection", function (socket) {
+  online_users++;
+  console.log(`New user :`, online_users);
+  socket.emit("greetMsg", { text: "welcome" });
+  io.emit("infoUsers", { total: online_users });
+
+  socket.on("disconnect", () => {
+    online_users--;
+    socket.broadcast.emit("infoUsers", { total: online_users });
+    console.log("client disconnected, total:", online_users);
+  });
+
+  socket.on("createMsg", (data) => {
+    console.log(data);
+    io.emit("newMsg", data);
+  });
+});
+
+module.exports = server;
