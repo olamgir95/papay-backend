@@ -68,7 +68,7 @@ let online_users = 0;
 io.on("connection", function (socket) {
   online_users++;
   console.log(`New user :`, online_users);
-  socket.emit("greetMsg", { text: "welcome" });
+  socket.emit("greetMsg", { text: "Welcome" });
   io.emit("infoUsers", { total: online_users });
 
   socket.on("disconnect", () => {
